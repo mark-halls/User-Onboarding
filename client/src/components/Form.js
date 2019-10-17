@@ -43,8 +43,12 @@ const FormikUserForm = withFormik({
   },
   validationSchema: Yup.object().shape({
     name: Yup.string().required("Name is required."),
-    email: Yup.string().required(),
-    password: Yup.string().required()
+    email: Yup.string()
+      .email()
+      .required(),
+    password: Yup.string()
+      .min(8, "Password must be at least 8 characters.")
+      .required()
   })
 })(UserForm);
 
