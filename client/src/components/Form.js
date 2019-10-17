@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
@@ -17,6 +17,8 @@ const StyledField = styled(Field)`
 `;
 
 const UserForm = ({ values, touched, errors }) => {
+  const [user, setUser] = useState([]);
+
   return (
     <StyledForm>
       <StyledField
@@ -69,11 +71,12 @@ const FormikUserForm = withFormik({
       .min(8, "Password must be at least 8 characters.")
       .required()
   }),
-  handleSubmit(values) {
+  handleSubmit(values, { setUser }) {
     axios
       .post("https://reqres.in/api/users", values)
       .then(res => {
         console.log(res);
+        setUser(res.data);
       })
       .catch(err => console.error(err));
   }
