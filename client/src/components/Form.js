@@ -2,6 +2,7 @@ import React from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
 import styled from "styled-components";
+import axios from "axios";
 
 const StyledForm = styled(Form)`
   display: flex;
@@ -67,7 +68,15 @@ const FormikUserForm = withFormik({
     password: Yup.string()
       .min(8, "Password must be at least 8 characters.")
       .required()
-  })
+  }),
+  handleSubmit(values) {
+    axios
+      .post("https://reqres.in/api/users", values)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => console.error(err));
+  }
 })(UserForm);
 
 export default FormikUserForm;
