@@ -1,13 +1,31 @@
 import React from "react";
 import { Form, Field, withFormik } from "formik";
 import * as Yup from "yup";
+import styled from "styled-components";
+
+const StyledForm = styled(Form)`
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+`;
+
+const StyledField = styled(Field)`
+  width: 50%;
+  margin: 10px;
+`;
 
 const UserForm = ({ values, touched, errors }) => {
   return (
-    <Form>
-      <Field type="text" name="name" placeholder="Name" value={values.name} />
+    <StyledForm>
+      <StyledField
+        type="text"
+        name="name"
+        placeholder="Name"
+        value={values.name}
+      />
       {touched.name && errors.name && <p>{errors.name}</p>}
-      <Field
+      <StyledField
         type="email"
         name="email"
         placeholder="Email"
@@ -15,7 +33,7 @@ const UserForm = ({ values, touched, errors }) => {
       />
       {touched.email && errors.email && <p>{errors.email}</p>}
 
-      <Field
+      <StyledField
         type="password"
         name="password"
         placeholder="Password"
@@ -24,11 +42,11 @@ const UserForm = ({ values, touched, errors }) => {
       {touched.password && errors.password && <p>{errors.password}</p>}
 
       <label>
-        <Field type="checkbox" name="terms" />" I agree to the terms and
-        conditions."
+        <Field type="checkbox" name="terms" />I agree to the terms and
+        conditions.
       </label>
       <button type="submit">Submit</button>
-    </Form>
+    </StyledForm>
   );
 };
 
